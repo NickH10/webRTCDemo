@@ -34,4 +34,3 @@ self.getOtherUser = function(callback) {
 		});
 	});
 };
-
