@@ -94,74 +94,7 @@ function answer(snapshot) {
 		// console.log('hey turn on camera');
 		setTimeout(function(){ answer(snapshot) }, 1000);
 	}
-
-    // answerer = new RTCPeerConnection(iceServer);
-    // answerer.addStream(video_stream);
-
-    // answerer.onicecandidate = function (event) {
-    //     if (!event || !event.candidate) return;
-    //     offerer.addIceCandidate(event.candidate);
-    // };
-
-    // answerer.onaddstream = function (event) {
-    //     remoteVideo.src = URL.createObjectURL(event.stream);
-    // };
-
-    // answerer.setRemoteDescription(offer);
-    // answerer.createAnswer(function (answer) {
-    //     answerer.setLocalDescription(answer);
-    //     offerer.setRemoteDescription(answer);
-    // }, handleError, mediaConstraints);
 }
-
-function call() {
-	console.log("Starting call");
-	var servers = null;
-
-	localPeerConnection = new RTCPeerConnection(servers);
-	localPeerConnection.onicecandidate = setUpLocalIceCandidate;
-
-	remotePeerConnection = new RTCPeerConnection(servers);
-	remotePeerConnection.onicecandidate = setUpRemoteIceCandidate;
-	remotePeerConnection.onaddstream = setUpRemoteStream;
-
-	localPeerConnection.addStream(localStream);
-	localPeerConnection.createOffer(setUpLocalDescription,handleError);
-}
-
-function setUpLocalDescription(description){
-	localPeerConnection.setLocalDescription(description);
-	console.log("Offer from localPeerConnection: \n" + description.sdp);
-	remotePeerConnection.setRemoteDescription(description);
-	remotePeerConnection.createAnswer(setUpRemoteDescription,handleError);
-}
-
-function setUpRemoteDescription(description){
-	remotePeerConnection.setLocalDescription(description);
-	console.log("Answer from remotePeerConnection: \n" + description.sdp);
-	localPeerConnection.setRemoteDescription(description);
-}
-
-
-function setUpRemoteStream(event){
-	remoteVideo.src = URL.createObjectURL(event.stream);
-	console.log("Received remote stream");
-}
-
-function setUpLocalIceCandidate(event){
-	if (event.candidate) {
-		remotePeerConnection.addIceCandidate(new RTCIceCandidate(event.candidate));
-		console.log("Local ICE candidate: \n" + event.candidate.candidate);
-	}
-}
-
-function setUpRemoteIceCandidate(event){
-	if (event.candidate) {
-		localPeerConnection.addIceCandidate(new RTCIceCandidate(event.candidate));
-		console.log("Remote ICE candidate: \n " + event.candidate.candidate);
-	}
-}
-
 
 function endCall() {
 	console.log("Ending call");
