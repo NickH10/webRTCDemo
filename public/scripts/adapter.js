@@ -1,6 +1,7 @@
 var RTCPeerConnection = null;
 var getUserMedia = null;
 var webrtcDetectedBrowser = null;
+var iceServer = null;
 
 function trace(text) {
   // This function is used for logging.
