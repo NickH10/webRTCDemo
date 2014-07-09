@@ -1,0 +1,22 @@
+"rules": {
+    ".read": false,
+    ".write": false,
+    "rooms": {
+      "$roomID":{
+        ".read": true,
+      }
+    },
+    "comments": {
+      ".read": true,
+      "$commentID": {
+        ".write": "auth != null && !data.exists()",
+        ".validate": "newData.hasChildren(['userid', 'body'])",
+        "body": {
+          ".validate":"newData.isString()"
+        },
+        "userid": {
+          ".validate":"newData.val() == auth.id"
+        }
+      }
+    }
+  }

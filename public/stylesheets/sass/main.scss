@@ -1,0 +1,11 @@
+$background-color: hsla(0,0%, 0%, 1);
+$teal: hsla(170, 50%, 45%, 1);
+
+#localVideo,
+#remoteVideo {
+	width: 640px;
+	height: 480px;
+	margin: 10px;
+	display: inline-block;
+	background-color: $background-color;
+}
