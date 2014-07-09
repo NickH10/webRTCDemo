@@ -39,8 +39,8 @@ function offer(snapshot) {
 
         offerer.onicecandidate = function (event) {
             if (!event || !event.candidate || !readyForIce) {
-            setTimeout(function(){ offerer.onicecandidate(event) }, 5000);
-            // return;
+                setTimeout(function(){ offerer.onicecandidate(event) }, 5000);
+                // return;
             }
             else {
                 firebaseConnection.pushToFirebase(usersRef.child(otherUserId), {iceCandidate: event.candidate});
